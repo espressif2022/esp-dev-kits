@@ -27,7 +27,6 @@ jobs:
       - name: Build examples
         shell: bash
         run: |
-          export IDF_EXTRA_ACTIONS_PATH=${GITHUB_WORKSPACE}/esp32-s3-lcd-ev-board/examples
           . ${IDF_PATH}/export.sh
           pip install idf-component-manager rtoml ruamel.yaml idf-build-apps --upgrade
           echo "Building examples..."
@@ -67,10 +66,10 @@ jobs:
         uses: actions/configure-pages@v2
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v1
         with:
           path: binaries/
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v1
