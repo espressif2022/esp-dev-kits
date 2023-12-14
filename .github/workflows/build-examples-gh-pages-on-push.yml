@@ -10,7 +10,10 @@ jobs:
   build:
     strategy:
       matrix:
-        idf_ver: ["v5.1.1"]
+        include:
+          - idf_ver: "v5.1.1"
+            parallel_count: 5
+            parallel_index: 1
     runs-on: ubuntu-latest
     container: espressif/idf:${{ matrix.idf_ver }}
     steps:
