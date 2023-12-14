@@ -26,7 +26,7 @@ jobs:
         run: |
           export IDF_EXTRA_ACTIONS_PATH=${GITHUB_WORKSPACE}/esp32-s3-lcd-ev-board/examples
           . ${IDF_PATH}/export.sh
-          pip install rtoml ruamel.yaml --upgrade
+          pip install idf-component-manager ruamel.yaml idf-build-apps --upgrade
           echo "Building examples..."
           pwd
           idf-build-apps find
