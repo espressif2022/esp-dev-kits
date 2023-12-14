@@ -1,5 +1,5 @@
 target = "all"
-paths = "examples"
+paths = "esp32-s3-lcd-ev-board/examples"
 recursive = true
 manifest_file = ".build-test-rules.yml"
 check_warnings = true
