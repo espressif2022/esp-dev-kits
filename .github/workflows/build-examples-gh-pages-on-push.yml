@@ -32,7 +32,7 @@ jobs:
           idf-build-apps find
           idf-build-apps build --collect-app-info out.json --build-dir "build_@w" --parallel-count ${{ matrix.parallel_count }} --parallel-index ${{ matrix.parallel_index }}
           echo "Merging binaries and generating config.toml..."
-          python ${GITHUB_WORKSPACE}/tools/ci/generateFiles.py out.json
+          python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
           echo "Done building examples."
 
       - name: Upload Artifact
