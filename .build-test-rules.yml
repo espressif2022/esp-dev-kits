@@ -1,4 +1,10 @@
-examples:
+# examples:
+#   disable:
+#     - if: CONFIG_NAME in ["usb_keyboard", "86box_demo"]
+#       reason: Example depends on BSP, which is supported only for IDF >= 5.0
+
+usb_keyboard:
   disable:
-    - if: CONFIG_NAME in ["usb_keyboard", "86box_demo"]
-      reason: Example depends on BSP, which is supported only for IDF >= 5.0
+
+86box_demo:
+  disable:
