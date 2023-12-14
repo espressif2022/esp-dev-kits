@@ -37,6 +37,7 @@ jobs:
           pip install rtoml ruamel.yaml --upgrade
           echo "Building examples..."
           pwd
+          idf-build-apps find
           idf-build-apps build --collect-app-info out.json --parallel-count ${{ matrix.parallel_count }} --parallel-index ${{ matrix.parallel_index }}
           echo "Merging binaries and generating config.toml..."
           python ${GITHUB_ACTION_PATH}/generateFiles.py out.json
