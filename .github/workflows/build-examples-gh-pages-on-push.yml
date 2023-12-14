@@ -1,0 +1,73 @@
+name: "ESP-IDF build examples to github pages (push)"
+
+on:
+    push:
+        branches:
+        - master
+
+jobs:
+
+  build:
+    strategy:
+      matrix:
+        idf_ver: ["v5.1.1"]
+    runs-on: ubuntu-latest
+    container: espressif/idf:${{ matrix.idf_ver }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+
+      - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+        shell: bash
+
+      - run: echo "IDF_VERSION=${{ inputs.idf_version }}" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Build examples
+        shell: bash
+        run: |
+          export IDF_EXTRA_ACTIONS_PATH=${GITHUB_WORKSPACE}/esp32-s3-lcd-ev-board/examples
+          ${IDF_PATH}/install.sh --enable-ci
+          . ${IDF_PATH}/export.sh
+          pip install rtoml ruamel.yaml --upgrade
+          echo "Building examples..."
+          idf-build-apps build --collect-app-info out.json --build-dir "build_@w" --parallel-count ${{ inputs.parallel_count }} --parallel-index ${{ inputs.parallel_index }}
+          echo "Merging binaries and generating config.toml..."
+          python ${GITHUB_ACTION_PATH}/generateFiles.py out.json
+          echo "Done building examples."
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: built_files
+          path: binaries/
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write      
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download built files
+        uses: actions/download-artifact@v3
+        with:
+          name: built_files
+          path: binaries/
+
+      - name: Upload built files to gh pages
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: binaries/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
