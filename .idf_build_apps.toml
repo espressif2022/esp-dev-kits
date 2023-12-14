@@ -1,5 +1,5 @@
 target = "all"
-paths = ["esp32-s3-lcd-ev-board/examples" "esp32-c3-lcdkit/examples"]
+paths = ["esp32-s3-lcd-ev-board/examples","esp32-c3-lcdkit/examples"]
 recursive = true
 manifest_file = ".build-test-rules.yml"
 check_warnings = true
