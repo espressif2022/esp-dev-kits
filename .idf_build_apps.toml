@@ -1,6 +1,7 @@
 target = "all"
 paths = ["esp32-s3-lcd-ev-board/examples","esp32-c3-lcdkit/examples"]
 recursive = true
+manifest-rootpath = "esp32-s3-lcd-ev-board/examples"
 manifest_file = ".build-test-rules.yml"
 check_warnings = true
 ignore_warning_file = ".ignore_build_warnings.txt"
