@@ -5,6 +5,8 @@
 
 usb_keyboard:
   disable:
+    - if: IDF_TARGET == "esp32s3"
 
 86box_demo:
   disable:
+    - if: IDF_TARGET == "esp32s3"
