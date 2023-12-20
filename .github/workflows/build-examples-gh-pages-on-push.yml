@@ -47,9 +47,9 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-
+      - run: mkdir -p images
       # uses: espressif/idf-examples-launchpad-ci-action@v1.0
-      - run: echo "${{ github.action_path }}" >> $GITHUB_PATH
+      - run: echo "${{ GITHUB_WORKSPACE }/images}" >> $IMAGE_PATH
         shell: bash
 
       - run: echo "IDF_VERSION=${{ matrix.idf_ver }}" >> $GITHUB_ENV
@@ -65,7 +65,8 @@ jobs:
           idf-build-apps find
           idf-build-apps build --collect-app-info out.json --build-dir "build_@w"
           echo "Merging images and generating config.toml..."
-          # python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
+          python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
+          # esptool.py --chip esp32s3 merge_bin -o "$GITHUB_WORKSPACE/images/${{matrix.build-dir}}_${{matrix.boards}}.bin" @flash_args
           echo "Done building examples."
 
       - name: Upload Artifact

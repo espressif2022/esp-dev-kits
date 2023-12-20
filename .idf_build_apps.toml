@@ -1,10 +1,10 @@
 target = "all"
 paths = ["esp32-s3-lcd-ev-board/examples/86box_smart_panel",
-         "esp32-s3-lcd-ev-board/examples/smart_panel",
-         "esp32-s3-lcd-ev-board/examples/usb_camera_lcd",
-         "esp32-s3-lcd-ev-board/examples/usb_msc_file_sys",
-         "esp32-s3-usb-bridge/examples/usb_wireless_bridge",
-         "esp32-s3-usb-otg/examples/factory",
+         # "esp32-s3-lcd-ev-board/examples/smart_panel",
+         # "esp32-s3-lcd-ev-board/examples/usb_camera_lcd",
+         # "esp32-s3-lcd-ev-board/examples/usb_msc_file_sys",
+         # "esp32-s3-usb-bridge/examples/usb_wireless_bridge",
+         # "esp32-s3-usb-otg/examples/factory",
          "esp32-c3-lcdkit/examples/knob_panel"]
 recursive = true
 manifest_file = ".build-test-rules.yml"
