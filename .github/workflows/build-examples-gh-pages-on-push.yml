@@ -57,7 +57,6 @@ jobs:
       - name: Build examples
         shell: bash
         run: |
-          # if [[ ${{matrix.idf_ver}} == v5.1.2 ]]; then
           . ${IDF_PATH}/export.sh
           pip install idf-component-manager rtoml ruamel.yaml idf-build-apps --upgrade
           echo "Building examples..."
@@ -67,7 +66,6 @@ jobs:
           echo "Merging binaries and generating config.toml..."
           python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
           echo "Done building examples."
-          # fi
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
