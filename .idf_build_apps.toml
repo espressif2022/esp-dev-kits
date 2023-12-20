@@ -1,4 +1,4 @@
-target = "esp32s3"
+target = "all"
 paths = ["esp32-s3-lcd-ev-board/examples/86box_smart_panel",
          "esp32-s3-lcd-ev-board/examples/smart_panel",
          "esp32-s3-lcd-ev-board/examples/usb_camera_lcd",
