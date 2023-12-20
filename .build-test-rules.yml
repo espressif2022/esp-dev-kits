@@ -1,10 +1,10 @@
 esp32-s3-usb-otg/examples/factory: # "release-v4.4"
   disable:
-    - if: IDF_VERSION_MAJOR > 5
+    - if: IDF_VERSION_MAJOR != 4
     - if: IDF_TARGET != "esp32s3"
       reason: which is supported only for IDF 4.4
 
-esp32-s3-usb-bridge/examples/usb_wireless_bridge: # "release-v5.0"
+esp32-s3-usb-bridge/examples/usb_wireless_bridge: # "v5.0.2"
   disable:
     - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR != 0
     - if: IDF_TARGET != "esp32s3"
