@@ -40,6 +40,7 @@ jobs:
       matrix:
         include:
           - idf_ver: "v5.1.2"
+          - idf_ver: "release-v5.0"
           - idf_ver: "release-v4.4"
     runs-on: ubuntu-latest
     container: espressif/idf:${{ matrix.idf_ver }}
@@ -63,15 +64,15 @@ jobs:
           pwd
           idf-build-apps find
           idf-build-apps build --collect-app-info out.json --build-dir "build_@w"
-          echo "Merging binaries and generating config.toml..."
-          python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
+          echo "Merging images and generating config.toml..."
+          # python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
           echo "Done building examples."
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: built_files
-          path: binaries/
+          path: images/
 
   deploy:
     needs: build
@@ -90,7 +91,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: built_files
-          path: binaries/
+          path: images/
+
+      - name: generate launchpad config
+        run: |
+          cd images/
+          ls
+          echo $GITHUB_PATH
+          echo $GITHUB_WORKSPACE
+          # $GITHUB_WORKSPACE/tools/launchpad/rename.sh $GITHUB_WORKSPACE
+          ls
+          $GITHUB_WORKSPACE/tools/launchpad/generate_launchpad_config.sh
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
@@ -98,7 +109,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: binaries/
+          path: images/
 
       - name: Deploy to GitHub Pages
         id: deployment

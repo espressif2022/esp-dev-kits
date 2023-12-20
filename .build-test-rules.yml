@@ -1,40 +1,40 @@
-esp32-s3-usb-otg/examples/factory:
+esp32-s3-usb-otg/examples/factory: # "release-v4.4"
   disable:
     - if: IDF_VERSION_MAJOR > 5
     - if: IDF_TARGET != "esp32s3"
       reason: which is supported only for IDF 4.4
 
-esp32-s3-lcd-ev-board/examples/86box_smart_panel:
+esp32-s3-lcd-ev-board/examples/86box_smart_panel: # "v5.1.2"
   disable:
-    - if: IDF_VERSION_MAJOR < 5
+    - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR == 0
     - if: IDF_TARGET != "esp32s3"
       reason: which is supported only for IDF >= 5.0
 
-esp32-s3-lcd-ev-board/examples/smart_panel:
+esp32-s3-lcd-ev-board/examples/smart_panel: # "v5.1.2"
   disable:
-    - if: IDF_VERSION_MAJOR < 5
+    - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR == 0
     - if: IDF_TARGET != "esp32s3"
       reason: which is supported only for IDF >= 5.0
 
-esp32-s3-lcd-ev-board/examples/usb_camera_lcd:
+esp32-s3-lcd-ev-board/examples/usb_camera_lcd: # "v5.1.2"
   disable:
-    - if: IDF_VERSION_MAJOR < 5
+    - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR == 0
     - if: IDF_TARGET != "esp32s3"
       reason: which is supported only for IDF >= 5.0
 
-esp32-s3-lcd-ev-board/examples/usb_msc_file_sys:
+esp32-s3-lcd-ev-board/examples/usb_msc_file_sys: # "v5.1.2"
   disable:
-    - if: IDF_VERSION_MAJOR < 5
+    - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR == 0
       reason: which is supported only for IDF >= 5.0
 
-esp32-c3-lcdkit/examples/knob_panel:
+esp32-c3-lcdkit/examples/knob_panel: # "v5.1.2"
   disable:
-    - if: IDF_VERSION_MAJOR < 5
+    - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR == 0
     - if: IDF_TARGET != "esp32c3"
       reason: which is supported only for IDF >= 5.0
 
-esp32-s3-usb-bridge/examples/usb_wireless_bridge:
+esp32-s3-usb-bridge/examples/usb_wireless_bridge: # "release-v5.0"
   disable:
-    - if: IDF_VERSION_MAJOR < 5
+    - if: IDF_VERSION_MAJOR < 5 or IDF_VERSION_MINOR != 0
     - if: IDF_TARGET != "esp32s3"
       reason: which is supported only for IDF >= 5.0
