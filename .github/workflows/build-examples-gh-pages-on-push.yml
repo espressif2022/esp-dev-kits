@@ -1,9 +1,37 @@
-name: "ESP-IDF build examples to github pages (push)"
+# Copyright 2022 Espressif Systems (Shanghai) PTE LTD
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This workflow build examples, store the artifacts and deploy them to github pages.
+# Generates the launchpad configuration file that can be used with the url.
+
+name: "Build examples to github pages"
 
 on:
     push:
         branches:
         - master
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
 
@@ -12,6 +40,7 @@ jobs:
       matrix:
         include:
           - idf_ver: "v5.1.2"
+          - idf_ver: "v4.4.6"
     runs-on: ubuntu-latest
     container: espressif/idf:${{ matrix.idf_ver }}
     steps:
@@ -28,6 +57,7 @@ jobs:
       - name: Build examples
         shell: bash
         run: |
+          # if [[ ${{matrix.idf_ver}} == v5.1.2 ]]; then
           . ${IDF_PATH}/export.sh
           pip install idf-component-manager rtoml ruamel.yaml idf-build-apps --upgrade
           echo "Building examples..."
@@ -37,6 +67,7 @@ jobs:
           echo "Merging binaries and generating config.toml..."
           python ${GITHUB_WORKSPACE}/tools/launchpad/generateFiles.py out.json
           echo "Done building examples."
+          # fi
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3

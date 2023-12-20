@@ -1,0 +1,29 @@
+esp32-s3-usb-otg/examples/factory:
+  disable:
+    - if: IDF_VERSION_MAJOR > 5
+      reason: Example depends on BSP, which is supported only for IDF 4.4
+
+esp32-s3-lcd-ev-board/examples/86box_smart_panel:
+  disable:
+    - if: IDF_VERSION_MAJOR < 5
+      reason: Example depends on BSP, which is supported only for IDF >= 5.0
+
+esp32-s3-lcd-ev-board/examples/smart_panel:
+  disable:
+    - if: IDF_VERSION_MAJOR < 5
+      reason: Example depends on BSP, which is supported only for IDF >= 5.0
+
+esp32-s3-lcd-ev-board/examples/usb_camera_lcd:
+  disable:
+    - if: IDF_VERSION_MAJOR < 5
+      reason: Example depends on BSP, which is supported only for IDF >= 5.0
+
+esp32-s3-lcd-ev-board/examples/usb_msc_file_sys:
+  disable:
+    - if: IDF_VERSION_MAJOR < 5
+      reason: Example depends on BSP, which is supported only for IDF >= 5.0
+
+esp32-c3-lcdkit/examples/knob_panel:
+  disable:
+    - if: IDF_VERSION_MAJOR < 5
+      reason: Example depends on BSP, which is supported only for IDF >= 5.0
