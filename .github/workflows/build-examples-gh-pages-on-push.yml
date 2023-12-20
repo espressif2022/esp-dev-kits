@@ -40,7 +40,7 @@ jobs:
       matrix:
         include:
           - idf_ver: "v5.1.2"
-          - idf_ver: "v4.4.6"
+          - idf_ver: "v4.4.4"
     runs-on: ubuntu-latest
     container: espressif/idf:${{ matrix.idf_ver }}
     steps:
